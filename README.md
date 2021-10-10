@@ -1,10 +1,11 @@
 ## Background:
 
-A few months ago we announced the Schema Import Initiative, its goal is to to help support many use cases for generating
-Ent schemas from external resources. Today, we are happy to announce the release of **entimport** - an importent (sorry)
-command line tool designed to create ent schemas from existing SQL databases. This is a feature the community has been
-asking for a long time. It can help ent users or potential users to transition an existing setup in another language or
-ORM to ent. It can also help with use cases where you would like to access the same data from different platforms (
+A few months ago we announced the [Schema Import Initiative](https://entgo.io/blog/2021/05/04/announcing-schema-imports)
+, its goal is to help support many use cases for generating Ent schemas from external resources. Today, we are happy to
+announce the release of **entimport** - an importent (sorry) command line tool designed to create ent schemas from
+existing SQL databases. This is a feature the community has been asking for a long time. It can help ent users or
+potential users to transition an existing setup in another language or ORM to ent. It can also help with use cases where
+you would like to access the same data from different platforms (
 automatically sync between them). The first version supports both `MySQL` and `PostgreSQL` databases.
 
 ## Getting Started:
@@ -51,7 +52,7 @@ Next, we will create a simple schema. For this example we will use a relation be
 - User
 - Car
 
-Connect to your database using MySQL console or any other DB tool and execute the following statements:
+Connect to the database using MySQL console or any other DB tool and execute the following statements:
 
 ```mysql
 # Users Table
@@ -107,7 +108,7 @@ go get entgo.io/ent/cmd/ent
 go run entgo.io/ent/cmd/ent init 
 ```
 
-Your project should look like this:
+The project should look like this:
 
 ```
 ├── docker-compose.yaml
@@ -339,46 +340,46 @@ WHERE name = 'Zeev';
 Great! now let's play a little more with `ent` and add some relations:
 
 ```go title="<project>/example.go"
-    import "entimport-tutorial/ent/user"
+import "entimport-tutorial/ent/user"
 
-	// Create Car
-	vw := client.Car.
-		Create().
-		SetModel("volkswagen").
-		SetColor("blue").
-		SetEngineSize(1400).
-		SaveX(ctx)
-	fmt.Println("First car created:", vw)
-	
-	// Update the user - add the car relation
-	client.User.Update().Where(user.ID(zeev.ID)).AddCars(vw).SaveX(ctx)
-	
-	// Query all cars that belong to user
-	cars := zeev.QueryCars().AllX(ctx)
-	fmt.Println("User cars:", cars)
-	
-	// Create a second Car
-	delorean := client.Car.
-		Create().
-		SetModel("delorean").
-		SetColor("silver").
-		SetEngineSize(9999).
-		SaveX(ctx)
-	fmt.Println("Second car created:", delorean)
-	
-	// Update the user - add another the car relation
-	client.User.Update().Where(user.ID(zeev.ID)).AddCars(delorean).SaveX(ctx)
-	
-	// Traverse the sub-graph.
-	cars = delorean.
-		QueryUser().
-		QueryCars().
-		AllX(ctx)
-	fmt.Println("User cars:", cars)
-	return nil
+// Create Car
+vw := client.Car.
+    Create().
+    SetModel("volkswagen").
+    SetColor("blue").
+    SetEngineSize(1400).
+    SaveX(ctx)
+fmt.Println("First car created:", vw)
+
+// Update the user - add the car relation
+client.User.Update().Where(user.ID(zeev.ID)).AddCars(vw).SaveX(ctx)
+
+// Query all cars that belong to user
+cars := zeev.QueryCars().AllX(ctx)
+fmt.Println("User cars:", cars)
+
+// Create a second Car
+delorean := client.Car.
+    Create().
+    SetModel("delorean").
+    SetColor("silver").
+    SetEngineSize(9999).
+    SaveX(ctx)
+fmt.Println("Second car created:", delorean)
+
+// Update the user - add another the car relation
+client.User.Update().Where(user.ID(zeev.ID)).AddCars(delorean).SaveX(ctx)
+
+// Traverse the sub-graph.
+cars = delorean.
+    QueryUser().
+    QueryCars().
+    AllX(ctx)
+fmt.Println("User cars:", cars)
+return nil
 ```
 
-After Running the code above, your DB should hold a user with 2 cars in a O2M relation.
+After Running the code above, the DB should hold a user with 2 cars in a O2M relation.
 
 ```mysql
 +--+---+----+----------+
@@ -454,9 +455,9 @@ return []ent.Edge{edge.To("child_users", User.Type), edge.From("parent_users", U
 
 ## Wrapping Up
 
-In this post, we presented the Upsert API, a long-anticipated capability, that is available by feature-flag in Ent
-v0.9.0. We discussed where upserts are commonly used in applications and the way they are implemented using common
-relational databases. Finally, we showed a simple example of how to get started with the Upsert API using Ent.
+In this post, we presented `entimport`, a tool that was anticipated and requested many times by our community. We showed
+an example how to use with `ent`. This tool is another edition to our schema import tools, which are designed to make
+the integration of `ent` easier. We hope this was useful.
 
 Have questions? Need help with getting started? Feel free to [join our Slack channel](https://entgo.io/docs/slack/).
 
