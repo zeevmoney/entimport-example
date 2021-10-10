@@ -6,11 +6,12 @@ replace ariga.io/entimport => ../playground/entimport
 
 replace ariga.io/atlas v0.0.0-unpublished => ../atlas
 
+require entgo.io/ent v0.9.2-0.20211003114041-842fc9df1c3e
+
 require (
 	ariga.io/atlas v0.0.0-unpublished // indirect
 	ariga.io/entimport v0.0.0-00010101000000-000000000000 // indirect
 	entgo.io/contrib v0.1.1-0.20210915070855-f0f3d8e8f57d // indirect
-	entgo.io/ent v0.9.2-0.20211003114041-842fc9df1c3e // indirect
 	github.com/go-openapi/inflect v0.19.0 // indirect
 	github.com/go-sql-driver/mysql v1.5.1-0.20200311113236-681ffa848bae // indirect
 	github.com/golang/protobuf v1.5.1 // indirect
@@ -25,4 +26,5 @@ require (
 	golang.org/x/tools v0.1.7 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 )
