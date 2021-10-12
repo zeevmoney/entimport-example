@@ -1,10 +1,3 @@
----
-title: Generating Ent Schemas from Existing SQL Databases 
-author: Zeev Manilovich
-authorURL: "https://github.com/zeevmoney"
-authorImageURL: "https://avatars.githubusercontent.com/u/7361100?v=4"
----
-
 ## Background:
 
 A few months ago the Ent project announced
