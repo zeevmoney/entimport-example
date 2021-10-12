@@ -1,5 +1,3 @@
-## Background:
-
 A few months ago the Ent project announced
 the [Schema Import Initiative](https://entgo.io/blog/2021/05/04/announcing-schema-imports), its goal is to help support
 many use cases for generating Ent schemas from external resources. Today, I'm happy to share a project I’ve been working
@@ -11,7 +9,7 @@ them).
 The first version supports both MySQL and PostgreSQL databases, with some limitations described below. Support for other
 relational databases such as SQLite is in the works.
 
-## Getting Started:
+## Getting Started
 
 To give you an idea of how `entimport` works, I want to share a quick example of end to end usage with a MySQL database.
 On a high-level, this is what we’re going to do:
