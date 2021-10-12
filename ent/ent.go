@@ -3,8 +3,8 @@
 package ent
 
 import (
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/user"
 	"errors"
 	"fmt"
 
@@ -143,7 +143,7 @@ func Sum(field string) AggregateFunc {
 	}
 }
 
-// ValidationError returns when validating a field or edge fails.
+// ValidationError returns when validating a field fails.
 type ValidationError struct {
 	Name string // Field or edge name.
 	err  error

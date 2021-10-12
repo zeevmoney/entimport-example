@@ -13,6 +13,8 @@ const (
 	FieldName = "name"
 	// FieldLastName holds the string denoting the last_name field in the database.
 	FieldLastName = "last_name"
+	// FieldPhone holds the string denoting the phone field in the database.
+	FieldPhone = "phone"
 	// EdgeCars holds the string denoting the cars edge name in mutations.
 	EdgeCars = "cars"
 	// Table holds the table name of the user in the database.
@@ -32,6 +34,7 @@ var Columns = []string{
 	FieldAge,
 	FieldName,
 	FieldLastName,
+	FieldPhone,
 }
 
 // ValidColumn reports if the column name is valid (part of the table columns).

@@ -14,7 +14,7 @@ type Car struct {
 }
 
 func (Car) Fields() []ent.Field {
-	return []ent.Field{field.Int("id"), field.String("model"), field.String("color"), field.Int32("engine_size"), field.Int("user_id").Optional()}
+	return []ent.Field{field.Int("id"), field.String("color"), field.Int32("engine_size"), field.String("model"), field.Int("user_id").Optional()}
 }
 func (Car) Edges() []ent.Edge {
 	return []ent.Edge{edge.From("user", User.Type).Ref("cars").Unique().Field("user_id")}

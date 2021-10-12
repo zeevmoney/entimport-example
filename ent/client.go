@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"log"
 
-	"entimport-tutorial/ent/migrate"
+	"entimport-example/ent/migrate"
 
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/user"
 
 	"entgo.io/ent/dialect"
 	"entgo.io/ent/dialect/sql"

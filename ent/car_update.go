@@ -4,10 +4,9 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/predicate"
-	"entimport-tutorial/ent/user"
-	"errors"
+	"entimport-example/ent/car"
+	"entimport-example/ent/predicate"
+	"entimport-example/ent/user"
 	"fmt"
 
 	"entgo.io/ent/dialect/sql"
@@ -378,7 +377,7 @@ func (cuo *CarUpdateOne) sqlSave(ctx context.Context) (_node *Car, err error) {
 	}
 	id, ok := cuo.mutation.ID()
 	if !ok {
-		return nil, &ValidationError{Name: "id", err: errors.New(`ent: missing "Car.id" for update`)}
+		return nil, &ValidationError{Name: "ID", err: fmt.Errorf("missing Car.ID for update")}
 	}
 	_spec.Node.ID.Value = id
 	if fields := cuo.fields; len(fields) > 0 {

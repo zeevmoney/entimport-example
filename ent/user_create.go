@@ -4,8 +4,8 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/user"
 	"errors"
 	"fmt"
 
@@ -42,6 +42,20 @@ func (uc *UserCreate) SetLastName(s string) *UserCreate {
 func (uc *UserCreate) SetNillableLastName(s *string) *UserCreate {
 	if s != nil {
 		uc.SetLastName(*s)
+	}
+	return uc
+}
+
+// SetPhone sets the "phone" field.
+func (uc *UserCreate) SetPhone(s string) *UserCreate {
+	uc.mutation.SetPhone(s)
+	return uc
+}
+
+// SetNillablePhone sets the "phone" field if the given value is not nil.
+func (uc *UserCreate) SetNillablePhone(s *string) *UserCreate {
+	if s != nil {
+		uc.SetPhone(*s)
 	}
 	return uc
 }
@@ -138,10 +152,10 @@ func (uc *UserCreate) ExecX(ctx context.Context) {
 // check runs all checks and user-defined validators on the builder.
 func (uc *UserCreate) check() error {
 	if _, ok := uc.mutation.Age(); !ok {
-		return &ValidationError{Name: "age", err: errors.New(`ent: missing required field "User.age"`)}
+		return &ValidationError{Name: "age", err: errors.New(`ent: missing required field "age"`)}
 	}
 	if _, ok := uc.mutation.Name(); !ok {
-		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "User.name"`)}
+		return &ValidationError{Name: "name", err: errors.New(`ent: missing required field "name"`)}
 	}
 	return nil
 }
@@ -199,6 +213,14 @@ func (uc *UserCreate) createSpec() (*User, *sqlgraph.CreateSpec) {
 			Column: user.FieldLastName,
 		})
 		_node.LastName = value
+	}
+	if value, ok := uc.mutation.Phone(); ok {
+		_spec.Fields = append(_spec.Fields, &sqlgraph.FieldSpec{
+			Type:   field.TypeString,
+			Value:  value,
+			Column: user.FieldPhone,
+		})
+		_node.Phone = value
 	}
 	if nodes := uc.mutation.CarsIDs(); len(nodes) > 0 {
 		edge := &sqlgraph.EdgeSpec{

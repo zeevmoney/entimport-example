@@ -4,8 +4,8 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/predicate"
+	"entimport-example/ent/car"
+	"entimport-example/ent/predicate"
 	"fmt"
 
 	"entgo.io/ent/dialect/sql"

@@ -4,7 +4,7 @@ package hook
 
 import (
 	"context"
-	"entimport-tutorial/ent"
+	"entimport-example/ent"
 	"fmt"
 )
 

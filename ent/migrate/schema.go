@@ -36,6 +36,7 @@ var (
 		{Name: "age", Type: field.TypeInt},
 		{Name: "name", Type: field.TypeString},
 		{Name: "last_name", Type: field.TypeString, Nullable: true},
+		{Name: "phone", Type: field.TypeString, Unique: true, Nullable: true},
 	}
 	// UsersTable holds the schema information for the "users" table.
 	UsersTable = &schema.Table{

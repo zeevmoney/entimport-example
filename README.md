@@ -35,7 +35,7 @@ Prerequisites:
 - Docker - https://docs.docker.com/get-docker/
 - Golang - https://golang.org/doc/install
 
-Start the project in a new directory called `entimport-exmaple`. Create a file named `docker-compose.yaml` and paste the
+Start the project in a new directory called `entimport-example`. Create a file named `docker-compose.yaml` and paste the
 following content inside:
 
 ```yaml
@@ -194,7 +194,7 @@ many relationship. Let’s see how `entimport` performed.
 
 - User Schema
 
-```go title="entimport-exmaple/ent/schema/user.go"
+```go title="entimport-example/ent/schema/user.go"
 type User struct {
 	ent.Schema
 }
@@ -212,7 +212,7 @@ func (User) Annotations() []schema.Annotation {
 
 - Car Schema:
 
-```go title="entimport-exmaple/ent/schema/car.go"
+```go title="entimport-example/ent/schema/car.go"
 type Car struct {
 	ent.Schema
 }
@@ -268,12 +268,12 @@ Let’s run a quick example to verify that our schema works:
 
 Create a file named `example.go` in the root of the project, with the following content:
 
-```go title="entimport-exmaple/example.go"
+```go title="entimport-example/example.go"
 import (
 	"context"
 	"log"
 
-	"entimport-exmaple/ent"
+	"entimport-example/ent"
 
 	"entgo.io/ent/dialect"
 	_ "github.com/go-sql-driver/mysql"
@@ -295,7 +295,7 @@ func Example_EntImport() {
 
 Let's try to add a user, write the following code at the end of the file:
 
-```go title="entimport-exmaple/example.go"
+```go title="entimport-example/example.go"
 	// Create User
 	zeev := client.User.
 		Create().
@@ -333,9 +333,9 @@ WHERE name = 'Zeev';
 
 Great! now let's play a little more with Ent and add some relations:
 
-```go title="entimport-exmaple/example.go"
+```go title="entimport-example/example.go"
 # make sure you add this impport
-import "entimport-exmaple/ent/user"
+import "entimport-example/ent/user"
 
 // Create Car
 vw := client.Car.
@@ -414,7 +414,7 @@ go run ariga.io/entimport/cmd/entimport -dialect mysql -dsn "root:pass@tcp(local
 
 We can see that the `user.go` file was changed:
 
-```go title="entimport-exmaple/ent/schema/user.go"
+```go title="entimport-example/ent/schema/user.go"
 func (User) Fields() []ent.Field {
 	return []ent.Field{field.Int("id"), ..., field.String("phone").Optional().Unique()}
 }

@@ -4,9 +4,9 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/predicate"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/predicate"
+	"entimport-example/ent/user"
 	"fmt"
 	"sync"
 
@@ -609,6 +609,7 @@ type UserMutation struct {
 	addage        *int
 	name          *string
 	last_name     *string
+	phone         *string
 	clearedFields map[string]struct{}
 	cars          map[int]struct{}
 	removedcars   map[int]struct{}
@@ -844,6 +845,55 @@ func (m *UserMutation) ResetLastName() {
 	delete(m.clearedFields, user.FieldLastName)
 }
 
+// SetPhone sets the "phone" field.
+func (m *UserMutation) SetPhone(s string) {
+	m.phone = &s
+}
+
+// Phone returns the value of the "phone" field in the mutation.
+func (m *UserMutation) Phone() (r string, exists bool) {
+	v := m.phone
+	if v == nil {
+		return
+	}
+	return *v, true
+}
+
+// OldPhone returns the old "phone" field's value of the User entity.
+// If the User object wasn't provided to the builder, the object is fetched from the database.
+// An error is returned if the mutation operation is not UpdateOne, or the database query fails.
+func (m *UserMutation) OldPhone(ctx context.Context) (v string, err error) {
+	if !m.op.Is(OpUpdateOne) {
+		return v, fmt.Errorf("OldPhone is only allowed on UpdateOne operations")
+	}
+	if m.id == nil || m.oldValue == nil {
+		return v, fmt.Errorf("OldPhone requires an ID field in the mutation")
+	}
+	oldValue, err := m.oldValue(ctx)
+	if err != nil {
+		return v, fmt.Errorf("querying old value for OldPhone: %w", err)
+	}
+	return oldValue.Phone, nil
+}
+
+// ClearPhone clears the value of the "phone" field.
+func (m *UserMutation) ClearPhone() {
+	m.phone = nil
+	m.clearedFields[user.FieldPhone] = struct{}{}
+}
+
+// PhoneCleared returns if the "phone" field was cleared in this mutation.
+func (m *UserMutation) PhoneCleared() bool {
+	_, ok := m.clearedFields[user.FieldPhone]
+	return ok
+}
+
+// ResetPhone resets all changes to the "phone" field.
+func (m *UserMutation) ResetPhone() {
+	m.phone = nil
+	delete(m.clearedFields, user.FieldPhone)
+}
+
 // AddCarIDs adds the "cars" edge to the Car entity by ids.
 func (m *UserMutation) AddCarIDs(ids ...int) {
 	if m.cars == nil {
@@ -917,7 +967,7 @@ func (m *UserMutation) Type() string {
 // order to get all numeric fields that were incremented/decremented, call
 // AddedFields().
 func (m *UserMutation) Fields() []string {
-	fields := make([]string, 0, 3)
+	fields := make([]string, 0, 4)
 	if m.age != nil {
 		fields = append(fields, user.FieldAge)
 	}
@@ -926,6 +976,9 @@ func (m *UserMutation) Fields() []string {
 	}
 	if m.last_name != nil {
 		fields = append(fields, user.FieldLastName)
+	}
+	if m.phone != nil {
+		fields = append(fields, user.FieldPhone)
 	}
 	return fields
 }
@@ -941,6 +994,8 @@ func (m *UserMutation) Field(name string) (ent.Value, bool) {
 		return m.Name()
 	case user.FieldLastName:
 		return m.LastName()
+	case user.FieldPhone:
+		return m.Phone()
 	}
 	return nil, false
 }
@@ -956,6 +1011,8 @@ func (m *UserMutation) OldField(ctx context.Context, name string) (ent.Value, er
 		return m.OldName(ctx)
 	case user.FieldLastName:
 		return m.OldLastName(ctx)
+	case user.FieldPhone:
+		return m.OldPhone(ctx)
 	}
 	return nil, fmt.Errorf("unknown User field %s", name)
 }
@@ -985,6 +1042,13 @@ func (m *UserMutation) SetField(name string, value ent.Value) error {
 			return fmt.Errorf("unexpected type %T for field %s", value, name)
 		}
 		m.SetLastName(v)
+		return nil
+	case user.FieldPhone:
+		v, ok := value.(string)
+		if !ok {
+			return fmt.Errorf("unexpected type %T for field %s", value, name)
+		}
+		m.SetPhone(v)
 		return nil
 	}
 	return fmt.Errorf("unknown User field %s", name)
@@ -1034,6 +1098,9 @@ func (m *UserMutation) ClearedFields() []string {
 	if m.FieldCleared(user.FieldLastName) {
 		fields = append(fields, user.FieldLastName)
 	}
+	if m.FieldCleared(user.FieldPhone) {
+		fields = append(fields, user.FieldPhone)
+	}
 	return fields
 }
 
@@ -1051,6 +1118,9 @@ func (m *UserMutation) ClearField(name string) error {
 	case user.FieldLastName:
 		m.ClearLastName()
 		return nil
+	case user.FieldPhone:
+		m.ClearPhone()
+		return nil
 	}
 	return fmt.Errorf("unknown User nullable field %s", name)
 }
@@ -1067,6 +1137,9 @@ func (m *UserMutation) ResetField(name string) error {
 		return nil
 	case user.FieldLastName:
 		m.ResetLastName()
+		return nil
+	case user.FieldPhone:
+		m.ResetPhone()
 		return nil
 	}
 	return fmt.Errorf("unknown User field %s", name)

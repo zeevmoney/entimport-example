@@ -5,9 +5,9 @@ package ent
 import (
 	"context"
 	"database/sql/driver"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/predicate"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/predicate"
+	"entimport-example/ent/user"
 	"errors"
 	"fmt"
 	"math"
@@ -474,9 +474,6 @@ func (uq *UserQuery) sqlQuery(ctx context.Context) *sql.Selector {
 	if uq.sql != nil {
 		selector = uq.sql
 		selector.Select(selector.Columns(columns...)...)
-	}
-	if uq.unique != nil && *uq.unique {
-		selector.Distinct()
 	}
 	for _, p := range uq.predicates {
 		p(selector)

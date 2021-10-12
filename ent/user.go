@@ -3,7 +3,7 @@
 package ent
 
 import (
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/user"
 	"fmt"
 	"strings"
 
@@ -20,8 +20,9 @@ type User struct {
 	// Name holds the value of the "name" field.
 	Name string `json:"name,omitempty"`
 	// LastName holds the value of the "last_name" field.
-	// surname
 	LastName string `json:"last_name,omitempty"`
+	// Phone holds the value of the "phone" field.
+	Phone string `json:"phone,omitempty"`
 	// Edges holds the relations/edges for other nodes in the graph.
 	// The values are being populated by the UserQuery when eager-loading is set.
 	Edges UserEdges `json:"edges"`
@@ -52,7 +53,7 @@ func (*User) scanValues(columns []string) ([]interface{}, error) {
 		switch columns[i] {
 		case user.FieldID, user.FieldAge:
 			values[i] = new(sql.NullInt64)
-		case user.FieldName, user.FieldLastName:
+		case user.FieldName, user.FieldLastName, user.FieldPhone:
 			values[i] = new(sql.NullString)
 		default:
 			return nil, fmt.Errorf("unexpected column %q for type User", columns[i])
@@ -93,6 +94,12 @@ func (u *User) assignValues(columns []string, values []interface{}) error {
 			} else if value.Valid {
 				u.LastName = value.String
 			}
+		case user.FieldPhone:
+			if value, ok := values[i].(*sql.NullString); !ok {
+				return fmt.Errorf("unexpected type %T for field phone", values[i])
+			} else if value.Valid {
+				u.Phone = value.String
+			}
 		}
 	}
 	return nil
@@ -132,6 +139,8 @@ func (u *User) String() string {
 	builder.WriteString(u.Name)
 	builder.WriteString(", last_name=")
 	builder.WriteString(u.LastName)
+	builder.WriteString(", phone=")
+	builder.WriteString(u.Phone)
 	builder.WriteByte(')')
 	return builder.String()
 }

@@ -4,8 +4,8 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/user"
 	"errors"
 	"fmt"
 
@@ -134,13 +134,13 @@ func (cc *CarCreate) ExecX(ctx context.Context) {
 // check runs all checks and user-defined validators on the builder.
 func (cc *CarCreate) check() error {
 	if _, ok := cc.mutation.Model(); !ok {
-		return &ValidationError{Name: "model", err: errors.New(`ent: missing required field "Car.model"`)}
+		return &ValidationError{Name: "model", err: errors.New(`ent: missing required field "model"`)}
 	}
 	if _, ok := cc.mutation.Color(); !ok {
-		return &ValidationError{Name: "color", err: errors.New(`ent: missing required field "Car.color"`)}
+		return &ValidationError{Name: "color", err: errors.New(`ent: missing required field "color"`)}
 	}
 	if _, ok := cc.mutation.EngineSize(); !ok {
-		return &ValidationError{Name: "engine_size", err: errors.New(`ent: missing required field "Car.engine_size"`)}
+		return &ValidationError{Name: "engine_size", err: errors.New(`ent: missing required field "engine_size"`)}
 	}
 	return nil
 }

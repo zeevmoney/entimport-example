@@ -3,7 +3,7 @@
 package car
 
 import (
-	"entimport-tutorial/ent/predicate"
+	"entimport-example/ent/predicate"
 
 	"entgo.io/ent/dialect/sql"
 	"entgo.io/ent/dialect/sql/sqlgraph"

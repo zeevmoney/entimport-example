@@ -2,9 +2,9 @@
 
 package runtime
 
-// The schema-stitching logic is generated in entimport-tutorial/ent/runtime.go
+// The schema-stitching logic is generated in entimport-example/ent/runtime.go
 
 const (
-	Version = "v0.9.2-0.20211003114041-842fc9df1c3e"            // Version of ent codegen.
-	Sum     = "h1:gn+IZ1n0gjNQ9A1h6c2GFXdJTtQWUY/U9RHFkslrZGA=" // Sum of ent codegen.
+	Version = "v0.9.1"                                          // Version of ent codegen.
+	Sum     = "h1:IG8andyeD79GG24U8Q+1Y45hQXj6gY5evSBcva5gtBk=" // Sum of ent codegen.
 )

@@ -14,7 +14,7 @@ type User struct {
 }
 
 func (User) Fields() []ent.Field {
-	return []ent.Field{field.Int("id"), field.Int("age"), field.String("name"), field.String("last_name").Optional(), field.String("phone").Optional().Unique()}
+	return []ent.Field{field.Int("id"), field.Int("age"), field.String("last_name").Optional().Comment("surname"), field.String("name"), field.String("phone").Optional().Unique()}
 }
 func (User) Edges() []ent.Edge {
 	return []ent.Edge{edge.To("cars", Car.Type)}

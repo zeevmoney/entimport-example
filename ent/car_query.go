@@ -4,9 +4,9 @@ package ent
 
 import (
 	"context"
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/predicate"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/predicate"
+	"entimport-example/ent/user"
 	"errors"
 	"fmt"
 	"math"
@@ -474,9 +474,6 @@ func (cq *CarQuery) sqlQuery(ctx context.Context) *sql.Selector {
 	if cq.sql != nil {
 		selector = cq.sql
 		selector.Select(selector.Columns(columns...)...)
-	}
-	if cq.unique != nil && *cq.unique {
-		selector.Distinct()
 	}
 	for _, p := range cq.predicates {
 		p(selector)

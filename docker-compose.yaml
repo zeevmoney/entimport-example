@@ -4,7 +4,7 @@ services:
 
   mysql8:
     platform: linux/amd64
-    image: mysql
+    image: mysql:latest
     environment:
       MYSQL_DATABASE: entimport
       MYSQL_ROOT_PASSWORD: pass

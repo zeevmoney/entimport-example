@@ -3,8 +3,8 @@
 package ent
 
 import (
-	"entimport-tutorial/ent/car"
-	"entimport-tutorial/ent/user"
+	"entimport-example/ent/car"
+	"entimport-example/ent/user"
 	"fmt"
 	"strings"
 
