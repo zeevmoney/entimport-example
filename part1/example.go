@@ -22,7 +22,7 @@ func main() {
 }
 
 func example(ctx context.Context, client *ent.Client) {
-	// Create a User
+	// Create a User.
 	zeev := client.User.
 		Create().
 		SetAge(33).

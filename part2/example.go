@@ -23,7 +23,7 @@ func main() {
 }
 
 func example(ctx context.Context, client *ent.Client) {
-	// Create a User
+	// Create a User.
 	zeev := client.User.
 		Create().
 		SetAge(33).
@@ -41,14 +41,14 @@ func example(ctx context.Context, client *ent.Client) {
 		SaveX(ctx)
 	fmt.Println("First car created:", vw)
 
-	// Update the user - add the car relation
+	// Update the user - add the car relation.
 	client.User.Update().Where(user.ID(zeev.ID)).AddCars(vw).SaveX(ctx)
 
-	// Query all cars that belong to user
+	// Query all cars that belong to user.
 	cars := zeev.QueryCars().AllX(ctx)
 	fmt.Println("User cars:", cars)
 
-	// Create a second Car
+	// Create a second Car.
 	delorean := client.Car.
 		Create().
 		SetModel("delorean").
@@ -57,7 +57,7 @@ func example(ctx context.Context, client *ent.Client) {
 		SaveX(ctx)
 	fmt.Println("Second car created:", delorean)
 
-	// Update the user - add another the car relation
+	// Update the user - add another car relation.
 	client.User.Update().Where(user.ID(zeev.ID)).AddCars(delorean).SaveX(ctx)
 
 	// Traverse the sub-graph.

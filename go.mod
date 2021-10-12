@@ -8,6 +8,6 @@ require (
 )
 
 require (
-	ariga.io/entimport v0.0.0-20211011171115-c0191a8783cc // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 )
