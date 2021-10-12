@@ -421,17 +421,3 @@ func (User) Fields() []ent.Field {
 ```
 
 Now we can run `go generate ./ent` again and use the new schema to a `phone` to the User entity.
-
-## Future Plans
-
-As mentioned above this initial version supports MySQL and PostgreSQL databases.  
-It also supports all types of SQL relations. We have plans to further upgrade the tool and add more features such as
-more PostgreSQL fields, default values, and more.
-
-## Wrapping Up
-
-In this post, I presented `entimport`, a tool that was anticipated and requested many times by the Ent community. I
-showed an example of how to use it with Ent. This tool is another addition to Ent schema import tools, which are
-designed to make the integration of ent even easier. For discussion and
-support, [open an issue](https://github.com/ariga/entimport/issues/new). The full example can be
-found [in here](https://github.com/zeevmoney/entimport-example). I hope this was useful.
